@@ -1,7 +1,7 @@
 <?php
 require_once($CFG->libdir.'/portfolio/plugin.php');
 require_once($CFG->libdir.'/filelib.php');
-require_once($CFG->libdir.'/boxlib.php');
+require_once(__DIR__.'/boxlib.php');
 
 class portfolio_plugin_boxnet extends portfolio_plugin_push_base {
 
@@ -126,7 +126,7 @@ class portfolio_plugin_boxnet extends portfolio_plugin_push_base {
         if (empty($this->boxclient)) {
             $returnurl = new moodle_url('/portfolio/add.php', array('postcontrol' => 1, 'type' => 'boxnet',
                 'sesskey' => sesskey()));
-            $this->boxclient = new boxnet_client($this->get_config('clientid'), $this->get_config('clientsecret'), $returnurl, '');
+            $this->boxclient = new portfolio_boxnet_client($this->get_config('clientid'), $this->get_config('clientsecret'), $returnurl, '');
         }
         if ($this->boxclient->is_logged_in()) {
             return false;
